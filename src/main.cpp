@@ -1,19 +1,19 @@
 #include <Arduino.h>
 
-#define LED_BUILTIN 2
+#define LED_VERTE 26
 
 void setup() {
   Serial.begin(115200);
-  pinMode(LED_BUILTIN, OUTPUT);
-  Serial.println("ESP32 OK - LED test demarre !");
+  pinMode(LED_VERTE, OUTPUT);
+  Serial.println("Test LED externe demarre !");
 }
 
 void loop() {
-  digitalWrite(LED_BUILTIN, HIGH);
-  Serial.println("LED ON");
-  delay(500);
+  digitalWrite(LED_VERTE, HIGH);
+  Serial.println("LED verte ON");
+  delay(1000);
 
-  digitalWrite(LED_BUILTIN, LOW);
-  Serial.println("LED OFF");
-  delay(500);
+  digitalWrite(LED_VERTE, LOW);
+  Serial.println("LED verte OFF");
+  delay(1000);
 }
