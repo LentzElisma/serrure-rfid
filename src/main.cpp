@@ -1,19 +1,29 @@
 #include <Arduino.h>
 
-#define LED_VERTE 26
+#define BUZZER 12
 
 void setup() {
   Serial.begin(115200);
-  pinMode(LED_VERTE, OUTPUT);
-  Serial.println("Test LED externe demarre !");
+  pinMode(BUZZER, OUTPUT);
+  Serial.println("Test buzzer demarre !");
 }
 
 void loop() {
-  digitalWrite(LED_VERTE, HIGH);
-  Serial.println("LED verte ON");
-  delay(1000);
+  // Bip court = acces autorise
+  Serial.println("Bip court");
+  digitalWrite(BUZZER, HIGH);
+  delay(100);
+  digitalWrite(BUZZER, LOW);
+  delay(2000);
 
-  digitalWrite(LED_VERTE, LOW);
-  Serial.println("LED verte OFF");
-  delay(1000);
+  // Double bip = acces refuse
+  Serial.println("Double bip");
+  digitalWrite(BUZZER, HIGH);
+  delay(100);
+  digitalWrite(BUZZER, LOW);
+  delay(100);
+  digitalWrite(BUZZER, HIGH);
+  delay(100);
+  digitalWrite(BUZZER, LOW);
+  delay(2000);
 }
