@@ -1,50 +1,33 @@
 #include <Arduino.h>
-#include <Wire.h>
-#include <Adafruit_GFX.h>
-#include <Adafruit_SSD1306.h>
+#include <ESP32Servo.h>
 
-// Dimensions de l'ecran
-#define SCREEN_WIDTH 128
-#define SCREEN_HEIGHT 64
+// Le servo est branche sur le pin D13
+#define SERVO_PIN 13
 
-
-Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
+Servo monServo;
 
 void setup() {
   Serial.begin(115200);
 
-  if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
-    Serial.println("ERREUR : OLED non detecte !");
-    while (true);  // Bloque ici si pas d'ecran
-  }
+ 
+  monServo.attach(SERVO_PIN);
 
-  Serial.println("OLED OK !");
-
-  // Effacer l'ecran (il demarre avec du bruit)
-  display.clearDisplay();
-
-  // Ecrire du texte
-  display.setTextSize(1);           // Taille petite
-  display.setTextColor(SSD1306_WHITE);
-  display.setCursor(0, 0);          // Position x=0, y=0
-  display.println("Serrure RFID");
-  display.println("================");
-  display.println("");
-
-  display.setTextSize(2);           // Taille grande
-  display.println("Hello !");
-
-  display.setTextSize(1);
-  display.println("");
-  display.println("OLED fonctionne");
-
-  // Envoyer tout a l'ecran d'un coup
-  // L'OLED utilise un "buffer" : on prepare
-  // tout en memoire puis on affiche
-  display.display();
+  Serial.println("Test servo demarre !");
 }
 
 void loop() {
-  // Rien pour le moment
-  // L'ecran garde le dernier affichage
+
+  Serial.println("Servo : 0 degres (ferme)");
+  monServo.write(0);   
+  delay(2000);           
+
+  // Position ouverte (90 degres)
+  Serial.println("Servo : 90 degres (ouvert)");
+  monServo.write(90);   
+  delay(2000);
+
+  // Retour ferme
+  Serial.println("Servo : 0 degres (ferme)");
+  monServo.write(0);
+  delay(2000);
 }
